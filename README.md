@@ -1,53 +1,58 @@
-Enunciado del Proyecto: Sistema de Gestión de Vehículos en una Flota de Transporte
+Enunciado del Proyecto: Sistema de Gestión de Usuarios y Permisos para una Plataforma SaaS
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Descripción del Proyecto:
-El proyecto consiste en desarrollar un sistema de gestión para una flota de vehículos utilizados en una empresa de transporte. El sistema debe permitir realizar operaciones como la creación de vehículos, la gestión de sus atributos (modelo, marca, color), y la ejecución de acciones como el llenado de combustible, la aceleración y el frenado. Además, el sistema debe ser capaz de gestionar vehículos de distintos tipos (motos, coches, camiones), aplicando diferentes comportamientos de acuerdo a cada tipo, como el uso de distintas estrategias para el consumo de combustible.
+El proyecto consiste en desarrollar un sistema para gestionar usuarios y sus roles dentro de una plataforma SaaS (Software como Servicio), donde los usuarios pueden tener diferentes niveles de acceso (por ejemplo, Administradores, Moderadores y Usuarios) y realizar acciones específicas de acuerdo con su rol. El sistema debe gestionar la creación de usuarios, asignación de roles, acceso a funcionalidades específicas y la ejecución de diversas acciones, como cambiar configuraciones o realizar tareas dentro de la plataforma.
 
 Objetivos del Proyecto:
 Aplicación de la Programación Orientada a Objetos (POO):
 
-Definir una clase base Vehiculo con atributos comunes (como modelo, marca, color) y métodos generales (por ejemplo, acelerar(), frenar(), cargar_combustible()).
-Crear clases derivadas, como Moto, Coche y Camion, que hereden de la clase base Vehiculo y tengan implementaciones específicas para cada tipo de vehículo (por ejemplo, diferentes formas de acelerar o frenar según el tipo).
+Definir una clase base Usuario con atributos comunes como nombre, email, rol y métodos comunes como iniciar_sesion() y cerrar_sesion().
+Crear clases derivadas como Administrador, Moderador y UsuarioRegular, que hereden de la clase base Usuario y tengan comportamientos específicos según el rol (por ejemplo, el Administrador puede modificar configuraciones del sistema, el Moderador puede gestionar contenido, etc.).
 Uso de Encapsulamiento y Herencia:
 
-Los atributos sensibles como el combustible y velocidad deben estar encapsulados para proteger su acceso directo. Se usará herencia para crear relaciones entre la clase base Vehiculo y sus clases hijas (Moto, Coche, Camion), de modo que compartan comportamiento común.
+Los atributos sensibles (como las contraseñas) deben estar encapsulados para evitar acceso directo.
+Utilizar herencia para crear relaciones jerárquicas entre Usuario y sus roles, asegurando que los métodos comunes se hereden de la clase base, pero que cada rol tenga acciones y permisos específicos.
 Polimorfismo y Métodos Abstractos:
 
-Implementar polimorfismo para permitir que los métodos como acelerar() y frenar() tengan comportamientos diferentes según el tipo de vehículo.
-Usar clases abstractas para definir métodos que deben ser implementados por todas las clases hijas, asegurando que cada tipo de vehículo tenga su propia implementación de ciertas acciones (como el frenado o aceleración).
+Implementar polimorfismo para que el método realizar_accion() tenga diferentes implementaciones dependiendo del rol del usuario. Los Administradores, por ejemplo, podrán realizar más acciones que un Usuario Regular.
+Usar clases abstractas para definir métodos comunes que deben ser implementados por todas las clases de rol, asegurando que cada tipo de usuario implemente su propio comportamiento.
 Patrones de Diseño:
 
-Singleton: Implementar un patrón Singleton para la clase GestorFlota que asegure que solo haya una instancia encargada de gestionar la flota de vehículos. Este patrón asegura que no haya múltiples instancias que gestionen los mismos vehículos.
-Factory: Usar un patrón Factory para crear instancias de vehículos (moto, coche, camión) de manera flexible sin que el código cliente dependa directamente de las clases específicas.
+Singleton: Usar un patrón Singleton para la clase GestorUsuarios, garantizando que solo exista una instancia que administre todos los usuarios y sus roles dentro de la plataforma.
+Factory: Implementar un patrón Factory para crear instancias de diferentes roles de usuarios (Administrador, Moderador, UsuarioRegular) sin que el código cliente dependa de las clases específicas.
 Patrones de Diseño Avanzados:
 
-Strategy: Implementar el patrón Strategy para manejar diferentes estrategias de consumo de combustible o diferentes métodos de aceleración, según el tipo de vehículo (por ejemplo, vehículos eléctricos vs vehículos de combustión interna).
-Observer: Usar el patrón Observer para notificar a otros sistemas del estado del vehículo, como cuando el combustible está bajo o cuando se necesita mantenimiento.
+Strategy: Usar el patrón Strategy para permitir que el sistema cambie la forma en que se asignan permisos y roles, basándose en una política de seguridad diferente según el tipo de usuario.
+Observer: Aplicar el patrón Observer para notificar a los usuarios sobre cambios importantes (por ejemplo, actualización de políticas o nuevos permisos asignados) o cuando se detecte actividad sospechosa en su cuenta.
 Uso de Clases Anónimas, Internas y Lambda Expressions:
 
-Implementar clases anónimas o internas para encapsular comportamientos específicos dentro de un vehículo, como una clase interna que maneje el sistema de frenado de un vehículo.
-Utilizar lambda expressions para realizar cálculos rápidos, como determinar el consumo de combustible en función de la velocidad o calcular la aceleración en tiempo real.
+Implementar clases anónimas o internas para funcionalidades específicas, como una clase que gestione la validación de contraseñas o una clase interna que verifique los permisos antes de ejecutar una acción.
+Utilizar lambda expressions para realizar cálculos rápidos, como evaluar si un usuario tiene suficientes privilegios para ejecutar una acción específica, sin necesidad de crear una función completa.
 Requerimientos del Sistema:
-Gestión de Vehículos:
+Gestión de Usuarios y Roles:
 
-Crear una clase base Vehiculo con métodos comunes (acelerar(), frenar(), cargar_combustible()) y atributos (modelo, marca, color).
-Crear las clases hijas Moto, Coche y Camion, que hereden de la clase base y redefinan los métodos de acuerdo a su tipo.
+Crear una clase base Usuario con métodos comunes (iniciar_sesion(), cerrar_sesion()) y atributos (nombre, email, rol).
+Crear las clases derivadas Administrador, Moderador y UsuarioRegular, con implementación de métodos específicos como gestionar_contenido() para Moderadores y modificar_configuraciones() para Administradores.
 Patrones de Diseño:
 
-Singleton: Implementar un sistema centralizado para gestionar la flota de vehículos mediante el patrón Singleton.
-Factory: Crear una clase VehiculoFactory que genere vehículos de diferentes tipos (moto, coche, camión) sin que el cliente tenga que preocuparse por la implementación concreta.
+Singleton: Implementar la clase GestorUsuarios con el patrón Singleton para garantizar que solo exista una instancia encargada de gestionar a todos los usuarios.
+Factory: Crear una clase UsuarioFactory que genere usuarios con roles específicos sin exponer detalles internos al cliente.
 Patrones Avanzados:
 
-Strategy: Implementar estrategias específicas de consumo de combustible según el tipo de vehículo (por ejemplo, vehículos eléctricos que usan una estrategia de carga rápida).
-Observer: Utilizar el patrón Observer para notificar a un sistema centralizado cuando un vehículo necesita mantenimiento o tiene bajo nivel de combustible.
+Strategy: Implementar estrategias para asignar permisos basadas en la política de seguridad de la empresa. Cada rol tendrá una estrategia diferente para manejar el acceso.
+Observer: Implementar un sistema de notificaciones que avise a los usuarios cuando haya actualizaciones en sus permisos, cambios de rol o eventos de seguridad importantes.
 Clases Anónimas y Lambda Expressions:
 
-Implementar clases internas para funcionalidades específicas de los vehículos (por ejemplo, un sistema de frenos de un coche).
-Usar expresiones lambda para realizar cálculos rápidos como la eficiencia de combustible en función de la carga del vehículo.
+Usar clases internas para la validación de datos (como una clase que valide contraseñas).
+Implementar expresiones lambda para realizar evaluaciones rápidas, como comprobar si un usuario tiene el rol adecuado antes de ejecutar una acción.
 Entregables del Proyecto:
-Código fuente completo con las clases base y derivadas de vehículos.
+Código fuente completo de las clases base y derivadas para los usuarios y roles.
 Implementación de los patrones de diseño Singleton, Factory, Strategy y Observer.
-Documentación detallada del código, explicando cómo se implementaron los patrones de diseño y la POO en el sistema.
-Pruebas unitarias que verifiquen el comportamiento de las clases, los patrones de diseño y el uso de lambdas.
+Documentación detallada sobre cómo se implementaron los patrones y la POO en el sistema.
+Pruebas unitarias para verificar el comportamiento del sistema, asegurando que los usuarios y sus permisos sean gestionados correctamente.
 Resumen:
-Este proyecto te permitirá aplicar conceptos clave de la Programación Orientada a Objetos (POO), como herencia, polimorfismo y encapsulamiento, junto con patrones de diseño como Singleton, Factory, Strategy y Observer en un caso realista de gestión de vehículos en una flota de transporte. Se busca crear un sistema modular y flexible que gestione diferentes tipos de vehículos, adaptándose a las necesidades cambiantes del negocio.
+Este proyecto te permitirá aplicar los conceptos fundamentales de la Programación Orientada a Objetos (POO), como herencia, polimorfismo, encapsulamiento y clases abstractas, junto con patrones de diseño como Singleton, Factory, Strategy y Observer en un escenario realista de gestión de usuarios y permisos en una plataforma SaaS. El sistema debe ser flexible, extensible y capaz de manejar distintos roles con diferentes permisos, y permitir la asignación dinámica de funciones en función del tipo de usuario. El uso de patrones de diseño avanzados optimizará la arquitectura del sistema, haciéndolo más modular y fácil de mantener.
+
+
