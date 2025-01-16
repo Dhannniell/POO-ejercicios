@@ -18,4 +18,4 @@ class Auto(Vehiculo):
         return f"El vehiculo es de marca: {self.marca}, modelo: {self.modelo} y tiene {self.puertas} puertas"
     
 mi_auto = Auto("Chevrolet", "Sedan", 4)
-print(mi_auto.descripcion())
+print(mi_auto.descripcion()) 
