@@ -80,4 +80,58 @@ class SistemaVeterinaria:
             print(f"Error: {e}")
     
     
-    def registrar_mascota
+    def registrar_mascota(self):
+        try:
+            nombre_cliente = input("Ingrese el nombre del Cliente al asociar la mascota: ").strip()
+            cliente = next((c for c in self.clientes if c.nombre == nombre_cliente),None)
+            
+            if not cliente:
+                raise ValueError("Cliente no encontrado.")
+            
+            nombre_mascota = input("Ingrese el nombre de la mascota: ").strip()
+            especie = input("Ingrese la especie: ").strip()
+            raza = input("ingrese la raza: ").strip()
+            edad = int(input("Ingrese la edad: ").strip())
+            
+            if not nombre_mascota or not especie or not raza or edad <=0:
+                raise ValueError("Detalles de la mascota invalidos")
+            
+            mascota = RegistrarMascota(nombre_mascota, especie, raza, edad)
+            cliente.agregar_mascota(mascota)
+            print("Mascota registrada con exito")
+            
+            
+        except ValueError as e:
+            print(f"Error: {e}")
+    
+    def programar_cita(self):
+        try:
+            nombre_cliente = input("Ingrese el nombre del cliente: ").strip()
+            nombre_mascota = input("Ingrese el nombre de la mascota: ").strip()
+            
+            cliente = next((c for c in self.clientes if c.nombre == nombre_cliente),None)
+            
+            if not cliente:
+                raise ValueError("Cliente no encontrado.")
+            
+            mascota =next((m for m in self.cliente.mascotas if m.nombre == nombre_mascota), None)
+            if not mascota:
+                raise ValueError("Mascota no encontrada.")
+
+            fecha = input("Ingrese la fecha (AAAA-MM-DD): ").strip()
+            hora = input("Ingrese la hora (HH:MM): ").strip()
+            servicio = input("Ingrese el servicio (consulta, vacunacion, etc): ").strip()
+            veterinario = input("Ingrese el nombre del veterinario: ").strip()
+            
+            datetime.strptime(fecha, "%Y-%m-%d")
+            datetime.strptime(hora , "%H:%M")
+
+            if not servicio or not veterinario:
+                raise ValueError("Detalle de la cita invalidos.")
+
+            cita = CitaMascota(fecha, hora, servicio, veterinario)
+            mascota.agregar_al_historial(cita)
+            print("Cita programada con extio")
+            
+        except ValueError as e:
+            print(f"Error: {e}") 
