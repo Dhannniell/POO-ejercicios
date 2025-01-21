@@ -65,16 +65,16 @@ class SistemaVeterinaria:
         
     def registrar_clientes(self):
         try:
-            nombre = input("Ingrese el nombre del cliente: ").strip()
-            contacto = input("Ingrese el contacto: ").strip()
-            direccion = input("Ingrese la direccion: ").strip()
+            nombre = input("Por favor, ingrese el nombre del cliente:").strip()
+            contacto = input("Por favor, ingrese el contacto: ").strip()
+            direccion = input("Por favor, ingrese la direccion: ").strip()
             
             if not nombre or not contacto or not direccion:
-                raise ValueError("Todos los campos son obligatorios")
+                raise ValueError("Es obligatorio completar todos los campos.")
             
             cliente = Cliente(nombre, contacto, direccion)
             self.clientes.append(cliente)
-            print("Cliente registrado con exito!")
+            print("¡Cliente registrado con éxito!")
         
         except ValueError as e:
             print(f"Error: {e}")
@@ -82,23 +82,23 @@ class SistemaVeterinaria:
     
     def registrar_mascota(self):
         try:
-            nombre_cliente = input("Ingrese el nombre del Cliente al asociar la mascota: ").strip()
+            nombre_cliente = input("Ingrese el nombre del cliente para asociar la mascota:").strip()
             cliente = next((c for c in self.clientes if c.nombre == nombre_cliente),None)
             
             if not cliente:
-                raise ValueError("Cliente no encontrado.")
+                raise ValueError("No se encontró al cliente.")
             
-            nombre_mascota = input("Ingrese el nombre de la mascota: ").strip()
-            especie = input("Ingrese la especie: ").strip()
-            raza = input("ingrese la raza: ").strip()
-            edad = int(input("Ingrese la edad: ").strip())
+            nombre_mascota = input("Por favor, ingrese el nombre de la mascota:").strip()
+            especie = input("Por favor, ingrese la especie: ").strip()
+            raza = input("Por favor, ingrese la raza: ").strip()
+            edad = int(input("Por favor, ingrese la edad: ").strip())
             
             if not nombre_mascota or not especie or not raza or edad <=0:
-                raise ValueError("Detalles de la mascota invalidos")
+                raise ValueError("Detalles de la mascota inválidos.")
             
             mascota = RegistrarMascota(nombre_mascota, especie, raza, edad)
             cliente.agregar_mascota(mascota)
-            print("Mascota registrada con exito")
+            print("¡Mascota registrada con éxito!")
             
             
         except ValueError as e:
@@ -106,8 +106,8 @@ class SistemaVeterinaria:
     
     def programar_cita(self):
         try:
-            nombre_cliente = input("Ingrese el nombre del cliente: ").strip()
-            nombre_mascota = input("Ingrese el nombre de la mascota: ").strip()
+            nombre_cliente = input("Ingrese el nombre del cliente:").strip()
+            nombre_mascota = input("Ingrese el nombre de la mascota:").strip()
             
             cliente = next((c for c in self.clientes if c.nombre == nombre_cliente),None)
             
@@ -127,11 +127,11 @@ class SistemaVeterinaria:
             datetime.strptime(hora , "%H:%M")
 
             if not servicio or not veterinario:
-                raise ValueError("Detalle de la cita invalidos.")
+                raise ValueError("Detalles de la cita inválidos.")
 
             cita = CitaMascota(fecha, hora, servicio, veterinario)
             mascota.agregar_al_historial(cita)
-            print("Cita programada con extio")
+            print("¡Cita programada con éxito!")
             
         except ValueError as e:
             print(f"Error: {e}") 
@@ -158,13 +158,13 @@ class SistemaVeterinaria:
             for i, cita in enumerate(mascota.historial_citas):
                 print(f"{i+1}. Fecha: {cita.fecha}, Hora: {cita.hora}, Servicio: {cita.servicio}, Veterinario: {cita.veterinario}")
             
-            indice = int(input("Seleccione el numero de la cita a actualizar: ").strip()) -1
+            indice = int(input("Seleccione el número de la cita que desea actualizar: ").strip()) -1
             if indice < 0 or indice >= len(mascota.historial_citas):
-                raise ValueError("Seleccion invalida.")
+                raise ValueError("Selección inválida..")
             
             cita = mascota.historial_citas[indice]
             
-            print("Deje en blanco los campos que no desea actualizar.")
+            print("Deje en blanco los campos que no desee actualizar.")
             
             nueva_fecha = input("Nueva fecha (AAAA-MM-DD): ").strip()
             nueva_hora = input("Nueva hora(HH:MM): ").strip()
@@ -185,7 +185,7 @@ class SistemaVeterinaria:
             if nuevo_veterinario:
                 cita.actualizar(veterinario = nuevo_veterinario)
                 
-            print("Cita actualizada con exito")
+            print("¡Cita actualizada con éxito!")
             
         except ValueError as e:
             print(f"Error: {e}") 
@@ -217,7 +217,7 @@ class SistemaVeterinaria:
             
     def iniciar(self):
         while True:
-            print("\nSistema de Gestion Veterinaria.")
+            print("\nSistema de Gestión Veterinaria: Huella Feliz.")
             print("1. Registrar Cliente.")
             print("2. Registrar Mascota.")
             print("3. Programar Cita.")
@@ -238,10 +238,10 @@ class SistemaVeterinaria:
             elif opcion == "5":
                 self.consultar_historial()
             elif opcion == "6":
-                print("Adios")
+                print("¡Gracias por usar nuestro sistema! ¡Hasta pronto!")
                 break
             else:
-                print("Opcion invalida. Por favor, intente de nuevo.")
+                print("Opción inválida. Por favor, intente nuevamente.")
                 
                 
 
