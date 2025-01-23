@@ -30,9 +30,9 @@ class Cita(ABC):
         self.servicio = servicio
         self.veterinario = veterinario
 
-        @abstractmethod
-        def actualizar(self, **kwargs):
-            pass 
+    @abstractmethod
+    def actualizar(self, **kwargs):
+        pass 
 
 # Definicion de las Subclases
 class Cliente(Persona):
@@ -160,7 +160,7 @@ class SistemaVeterinaria:
             
             indice = int(input("Seleccione el número de la cita que desea actualizar: ").strip()) -1
             if indice < 0 or indice >= len(mascota.historial_citas):
-                raise ValueError("Selección inválida..")
+                raise ValueError("Selección inválida.")
             
             cita = mascota.historial_citas[indice]
             
@@ -217,7 +217,7 @@ class SistemaVeterinaria:
             
     def iniciar(self):
         while True:
-            print("\nSistema de Gestión Veterinaria: Huella Feliz.")
+            print("\n -- Sistema de Gestión Veterinaria -- \n-- Huella Feliz. --")
             print("1. Registrar Cliente.")
             print("2. Registrar Mascota.")
             print("3. Programar Cita.")
