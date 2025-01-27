@@ -1,5 +1,5 @@
 #Variable Global
-Clientes = []
+clientes = []
 
 #Clases principales
 class SistemaVeterinaria:
@@ -18,6 +18,9 @@ class SistemaVeterinaria:
             super().__init__(nombre, contacto)
             self.direccion = direccion 
             self.mascota = []
+            
+        def agregar_mascota(self, mascota):
+            self.mascota.append(mascota)
             
     class Mascota:
         id_contador = 1
@@ -58,12 +61,32 @@ class SistemaVeterinaria:
             
             cliente = SistemaVeterinaria.Cliente(nombre, contacto, direccion)
     
-    def registrar_mascota():
-        pass
-
+    #def registrar_mascota():
+        
+            print("╔══════════════════════════════════════════╗")
+            print("║         REGISTRO DE MASCOTA              ║")
+            print("╚══════════════════════════════════════════╝")
+            
+            # Solicita los detalles de la mascota.
+            nombre_mascota = input("Por favor, ingrese el nombre de la mascota:").strip()
+            especie = input("Por favor, ingrese la especie: ").strip()
+            raza = raza = input("Por favor, ingrese la raza: ").strip()
+            edad = int(input("Por favor, ingrese la edad: "))
+            
+            mascota = SistemaVeterinaria.Mascota(nombre_mascota, especie, raza, edad)
+            cliente.agregar_mascota(mascota)
+            
+            clientes.append(cliente)
+            
     def programar_cita():
-        pass
-    
+        
+        cliente_id = int(input("Ingrese el ID del cliente: "))
+        cliente = next((c for c in clientes if c.id == cliente_id), None)
+
+        if not clientes:
+            print("Cliente no encontrado.")
+            return
+        
     def actualizar_citas():
         pass
         
