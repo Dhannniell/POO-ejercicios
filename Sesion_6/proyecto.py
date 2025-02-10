@@ -21,11 +21,19 @@ class Developer(Empleado):
         return self.salario_base + 2000
     
 def calcular_total_salario(empleado:Empleado) -> float:
+    '''_summary_
+    
+    n = Avance de linea en linea
+    s = Para saltar de funcion (metodo) en funcion
+    c = Para saltar hacia la siguiente pausa
+    p variable = Muestra el valor de una variable en algun momento de la ejecucion
+    '''
+    pdb.set_trace() # Activacion del debuger
     return empleado.calcular_salario()
 
 if __name__ == '__main__':
     manager = Manager("Pascual", 30000)
-    developer = Developer("Jacinta", 2500)
+    developer = Developer("Jacinta", 25000)
     
     print(calcular_total_salario(manager))
     print(calcular_total_salario(developer))
