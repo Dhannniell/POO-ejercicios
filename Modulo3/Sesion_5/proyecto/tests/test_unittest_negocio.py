@@ -15,7 +15,7 @@ class TestVendedor(unittest.TestCase):
     def test_calcular_comision_base(self):
         self.assertEqual(self.vendedor_base.calcular_comision(), 100.0)
         
-    def test_calcular_comision_base(self):
+    def test_calcular_comision_premium(self):
         self.assertEqual(self.vendedor_premium.calcular_comision(), 300.0)
         
 
