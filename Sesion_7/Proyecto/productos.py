@@ -35,4 +35,20 @@ def calcular_total(lista_productos):
     total = 0
     for producto in lista_productos:
         total += producto['precio']
-    return total
+    return total 
+
+def agregar_producto(id_producto, cantidad, lista_productos):
+    """ Agregar un producto a la lista de compra y registrar la venta"""
+    producto = obtener_producto(id_producto)
+    if producto:
+        lista_productos.append({"nombre": producto["nombre"], "precio": producto["precio"] * cantidad})
+        
+        # Registrar la venta en el historial
+        historial_ventas.append({
+            "producto": producto["nombre"],
+            "cantidad": cantidad,
+            "precio_total": producto["precio"] * cantidad
+            
+        })
+    else:
+        raise ValueError(f"Producto con ID {id_producto} no encontrado.")
